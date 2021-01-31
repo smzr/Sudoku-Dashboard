@@ -1,0 +1,284 @@
+/*
+* Sudoku Gang main stylesheet
+* 23/01/2021
+* -Sammy
+*/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* ~~Variables~~ */
+
+$surface: hsl(240,13%,12%);
+$primary: hsl(325,100%,75%);
+$secondary: hsl(275,100%,70%);
+$alt: hsl(190,100%,70%);
+$red: hsl(0,90%,58%);
+$green: hsl(123,50%,60%);
+
+/* ~~Typography~~ */
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+
+html {font-size: 100%;} /*16px*/
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+p {margin-bottom: 1rem;}
+
+h1, h2, h3, h4, h5 {
+  margin: 3rem 0 1.38rem;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: $primary;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.052rem;
+}
+h2 {font-size: 2.441rem;}
+h3 {font-size: 1.953rem;}
+h4 {font-size: 1.563rem;}
+h5 {font-size: 1.25rem;}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: $surface;
+	color: white;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  background: lighten($surface, 10);
+  color: white;
+  padding: .5rem 1rem;
+  width: 100%;
+  height: 60px;
+  z-index: 1;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar__items {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+.navbar__items--right {
+  justify-content: flex-end;
+  text-align: right;
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+
+.navbar__item {
+  display: inline-block;
+  padding: .25rem 1rem;
+}
+
+.navbar__brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__brand img {
+  height: 48px;
+}
+
+.navbar__link, .navbar__brand {
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.navbar__link {
+  color: white;
+  transition: all ease 0.3s;
+  &:hover {
+    color: $primary;
+  }
+}
+
+section {
+  padding: 8px 16px;
+}
+
+.wrapper {
+	max-width: 1008px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.online-players__header {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  h2 {
+    margin: 0;
+  }
+  span {
+    color: $secondary;
+    text-align: right;
+    width: 100%;
+  }
+}
+
+.online-players {
+	background-color: lighten($surface, 5);
+	border-radius: 0.5em;
+	padding: 8px;
+	display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.player__head > img {
+  width: 64px;
+	height: auto;
+	border-radius: 50%;
+}
+
+.player {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  flex: 0 0 64px;
+  text-align: center;
+}
+
+.player__name {
+	margin: 0;
+  font-size: 12px;
+  max-width: 10ch;
+	text-overflow: ellipsis;
+	overflow: hidden;
+  white-space: nowrap;
+}
+
+.player__head {
+	position: relative;
+	width: 64px;
+  height: 64px;
+	border-radius: 50%;
+}
+
+.status {
+	position: absolute;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
+	bottom: 0;
+	right: 0;
+	border: 4px solid lighten($surface, 5);
+  transition: all linear 0.1s;
+  transition-delay: 0.3s;
+}
+
+.player.online {
+	.status {background-color: $green;}
+  .player__name {color: $secondary}
+}
+
+.player.banned {
+  img {
+    filter: grayscale(100%);
+    opacity: 50%;
+  }
+  .status {background-color: $red;}
+  .player__name {color: lighten($red, 5);}
+}
+
+.player.offline {
+  img {
+    filter: grayscale(100%);
+    opacity: 50%;
+  }
+  .status {background-color: darken(grayscale($green), 20);}
+  .player__name {color: darken(grayscale($green), 20);}
+}
+
+.player.banned .status:after {
+  content: "\f54c";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: white;
+}
+
+.player.banned:hover .status {
+  transform: scale(1.25);
+}
+
+.player.banned:hover {
+  cursor: help;
+}
+
+.player {
+  position: relative;
+}
+
+.player .tooltip {
+  visibility: hidden;
+  width: max-content;
+  background-color: lighten($surface, 30);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  opacity: 0;
+  transition: all ease 0.3s;
+  transition-delay: 0.3s;
+  pointer-events: none;
+}
+
+.player .tooltip::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: lighten($surface, 30) transparent transparent transparent;
+}
+
+.player:hover .tooltip {
+  visibility: visible;
+  opacity: 100%;
+  top: -50px;
+}
