@@ -207,7 +207,7 @@ section {
 .player.banned {
   img {
     filter: grayscale(100%);
-    opacity: 50%;
+    opacity: 0.5;
   }
   .status {background-color: $red;}
   .player__name {color: lighten($red, 5);}
@@ -216,7 +216,7 @@ section {
 .player.offline {
   img {
     filter: grayscale(100%);
-    opacity: 50%;
+    opacity: 0.5;
   }
   .status {background-color: darken(grayscale($green), 20);}
   .player__name {color: darken(grayscale($green), 20);}
@@ -279,6 +279,6 @@ section {
 
 .player:hover .tooltip {
   visibility: visible;
-  opacity: 100%;
+  opacity: 1;
   top: -50px;
 }
