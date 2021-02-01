@@ -66,7 +66,7 @@ class Players extends React.Component {
           {this.state.players.map(player => 
           <div key={player.uuid} className={"player" + (player.isOnline ? " online" : (player.isBanned ? " banned" : " offline"))}>
             <div className="player__head">
-              <img src={"https://crafatar.com/avatars/" + player.uuid} alt={player.name} />
+              <img src={"https://crafatar.com/avatars/" + player.uuid + "?overlay"} alt={player.name} />
               <span className="status"></span>
             </div>
             <p className="player__name">{player.name}</p>
