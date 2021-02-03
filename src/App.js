@@ -39,7 +39,6 @@ class Players extends React.Component {
   }
 
   async refreshPlayers() {
-    this.setState({ loading: true })
     const url = "https://sudoku-gangban.ga/getdata";
     const response = await fetch(url);
     const data = await response.json();
@@ -50,6 +49,10 @@ class Players extends React.Component {
 
   componentDidMount() {
     this.refreshPlayers()
+
+    setInterval(() => {
+      this.refreshPlayers()
+    }, 5000);
   }
 
   render() {
@@ -92,7 +95,7 @@ class App extends React.Component {
               </a>
             </div>
             <div className="navbar__items navbar__items--right">
-              <a className="navbar__item navbar__link" href="https://i.imgur.com/QCPHRwl.png" target="_blank"><small>Dashboard by Sammy</small></a>
+              <a className="navbar__item navbar__link" href="https://i.imgur.com/QCPHRwl.png" rel="noreferrer" target="_blank"><small>Dashboard by Sammy</small></a>
             </div>
           </div>
         </header>
